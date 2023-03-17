@@ -63,7 +63,7 @@ public class Event {
     }
 
     //METHODS
-    public boolean beforeToday(LocalDate date){
+    public boolean beforeToday(){
         LocalDate today = LocalDate.now();
         return date.isBefore(today);
     }
