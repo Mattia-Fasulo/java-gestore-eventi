@@ -2,6 +2,8 @@ package org.exercises.java;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,35 +36,40 @@ public class LIstEvent {
     }
 
     //METHODS
-    public void addEvent(Event event){
+    public void addEvent(Event event) {
         listEvent.add(event);
     }
 
-    public List<Event> listByDate(LocalDate date){
+    public List<Event> listByDate(LocalDate date) {
         List<Event> listByDate = new ArrayList<>();
-        for (Event event : listEvent){
-            if(event.getDate() == date){
+        for (Event event : listEvent) {
+            if (event.getDate() == date) {
                 listByDate.add(event);
             }
         }
-        return  listByDate;
+        return listByDate;
     }
 
-    public int countEvent(){
+    public int countEvent() {
         int count = 0;
-        for (Event event : listEvent){
+        for (Event event : listEvent) {
             count++;
         }
         return count;
     }
 
-    public void removeAllEvent(){
+    public void removeAllEvent() {
 
-        while(listEvent.size() > 0){
+        while (listEvent.size() > 0) {
             listEvent.remove(0);
         }
 
     }
+
+    public void sortByDate(){
+         Collections.sort(listEvent);
+    }
+
 
 
 }

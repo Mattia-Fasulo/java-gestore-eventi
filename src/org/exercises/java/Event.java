@@ -3,7 +3,7 @@ package org.exercises.java;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Event {
+public class Event  implements Comparable<Event>{
     //ATTRIBUTES
     private String title;
     private LocalDate date;
@@ -14,7 +14,7 @@ public class Event {
     public Event(String title, LocalDate date, int totalPlaces) {
 
         //gestitsco l'eccezione in cui la data inserita è anteriore alla data di oggi
-        if (beforeToday(date)){
+        if (beforeToday()){
             throw new EventException("The date cannot be earlier than the current date");
         }
 
@@ -48,7 +48,7 @@ public class Event {
     }
 
     public void setDate(LocalDate date) {
-        if (beforeToday(date)){
+        if (beforeToday()){
             throw new EventException("The date cannot be earlier than the current date");
         }
         this.date = date;
@@ -71,7 +71,7 @@ public class Event {
 
 
     public void reserve(){
-        if (beforeToday(date)){
+        if (beforeToday()){
             throw new EventException("the event is not avaiable");
         }else if(reservedPlaces < totalPlaces){
             reservedPlaces++;
@@ -82,7 +82,7 @@ public class Event {
     }
 
     public void cancelReservation(){
-        if(beforeToday(date)){
+        if(beforeToday()){
             throw new EventException("You can't cancel your booking for a past event");
         }else if(reservedPlaces == 0){
             throw new EventException("there are no reservations");
@@ -98,5 +98,11 @@ public class Event {
                 ", totalPlaces=" + totalPlaces +
                 ", reservedPlaces=" + reservedPlaces +
                 '}';
+    }
+
+
+    @Override
+    public int compareTo(Event o) {
+        return getDate().compareTo(o.getDate());
     }
 }
