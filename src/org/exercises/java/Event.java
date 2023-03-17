@@ -88,7 +88,7 @@ public class Event {
 
     @Override
     public String toString() {
-        return "Event{" +
+        return "{" +
                 "title='" + title + '\'' +
                 ", date=" + getFormatDate() +
                 ", totalPlaces=" + totalPlaces +
