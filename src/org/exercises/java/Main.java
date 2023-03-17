@@ -79,38 +79,42 @@ public class Main {
 
 
                         for (int i = 0; i < numReservation; i++){
-                            if (event != null && event.getReservedPlaces() < event.getTotalPlaces()) {
-                                event.reserve();
-                                count++;
-                            } else if (event != null && event.getReservedPlaces() == event.getTotalPlaces()) {
-                                System.out.println("sorry, completed places");
+
+                            try{
+                                if (event != null){
+                                    event.reserve();
+                                    count++;
+                                }
+
+                            } catch (EventException e) {
                                 System.out.println();
-                                if(i > 1){
-                                    boolean choice;
-                                    System.out.println("you have booked " + i + " places");
-                                    System.out.println("do you want to cancel these reservations? (y/n)");
-                                    choice = scan.nextLine().equalsIgnoreCase("y");
-
+                                System.out.println(e.getMessage());
+                                if (event.getReservedPlaces() == event.getTotalPlaces()){
                                     System.out.println();
-
-                                    if(choice){
-                                        for (int x = 0; x < i; x++){
-                                            event.cancelReservation();
-                                            count--;
-                                        }
-                                        System.out.println("cancelled reservations");
-
-
-                                    } else {
+                                    if(i > 1){
+                                        boolean choice;
                                         System.out.println("you have booked " + i + " places");
+                                        System.out.println("do you want to cancel these reservations? (y/n)");
+                                        choice = scan.nextLine().equalsIgnoreCase("y");
+
                                         System.out.println();
+
+                                        if(choice){
+                                            for (int x = 0; x < i; x++){
+                                                event.cancelReservation();
+                                                count--;
+                                            }
+                                            System.out.println("cancelled reservations");
+
+
+                                        } else {
+                                            System.out.println("you have booked " + i + " places");
+                                            System.out.println();
+                                        }
                                     }
                                 }
-                            } else {
-                                System.out.println("there are no events");
-                                System.out.println();
-                                break;
                             }
+
 
 
                         }
@@ -129,22 +133,28 @@ public class Main {
 
                     case "2":
                         int numCancellations;
+                        int numDelete = 0;
 
                         System.out.print("how many reservations do you want to cancel? ");
                         numReservation = Integer.parseInt(scan.nextLine());
 
                         for (int i = 0; i < numReservation; i++){
-                            if(event != null && event.getReservedPlaces() > 0){
-                                event.cancelReservation();
-                                count--;
-                            } else if (event != null && event.getReservedPlaces() == 0) {
-                                System.out.println("there are no other reservations");
 
-                            } else {
-                                System.out.println("there are no events");
+
+                            try{
+                                if (event != null){
+                                    event.cancelReservation();
+                                    count--;
+                                    numDelete++;
+                                }
+                            } catch (EventException e){
                                 System.out.println();
+                                System.out.println("yuo have cancelled " + numDelete + " reservation");
+                                System.out.println();
+                                System.out.println(e.getMessage());
                                 break;
                             }
+
                         }
 
                         System.out.println();

@@ -71,7 +71,9 @@ public class Event {
 
 
     public void reserve(){
-        if(reservedPlaces < totalPlaces){
+        if (beforeToday(date)){
+            throw new EventException("the event is not avaiable");
+        }else if(reservedPlaces < totalPlaces){
             reservedPlaces++;
         } else {
             throw new EventException("the places are finished");
@@ -80,7 +82,9 @@ public class Event {
     }
 
     public void cancelReservation(){
-        if(reservedPlaces == 0){
+        if(beforeToday(date)){
+            throw new EventException("You can't cancel your booking for a past event");
+        }else if(reservedPlaces == 0){
             throw new EventException("there are no reservations");
         }
         reservedPlaces--;
