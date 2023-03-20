@@ -58,6 +58,11 @@ public class LIstEvent {
         return count;
     }
 
+    //per farlo funzionare devo andare a modificare il metodo equals
+    public boolean removeEvent (Event e){
+        return listEvent.remove(e);
+    }
+
     public void removeAllEvent() {
 
         while (listEvent.size() > 0) {

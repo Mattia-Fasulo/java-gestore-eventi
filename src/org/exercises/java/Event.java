@@ -100,6 +100,27 @@ public class Event  implements Comparable<Event>{
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Event event = (Event) o;
+
+        if (getTotalPlaces() != event.getTotalPlaces()) return false;
+        if (getReservedPlaces() != event.getReservedPlaces()) return false;
+        if (getTitle() != null ? !getTitle().equals(event.getTitle()) : event.getTitle() != null) return false;
+        return getDate().equals(event.getDate());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getTitle() != null ? getTitle().hashCode() : 0;
+        result = 31 * result + getDate().hashCode();
+        result = 31 * result + getTotalPlaces();
+        result = 31 * result + getReservedPlaces();
+        return result;
+    }
 
     @Override
     public int compareTo(Event o) {
