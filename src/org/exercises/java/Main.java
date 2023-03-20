@@ -9,8 +9,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 
-        Concert concert = new Concert("o",LocalDate.of(2023,4,20), 100, LocalTime.of(10,10,10), BigDecimal.valueOf(20.2));
-        System.out.println(concert);
+
 
         System.out.println();
         System.out.println("******************************************");

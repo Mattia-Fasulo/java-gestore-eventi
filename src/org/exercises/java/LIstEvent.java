@@ -43,7 +43,7 @@ public class LIstEvent {
     public List<Event> listByDate(LocalDate date) {
         List<Event> listByDate = new ArrayList<>();
         for (Event event : listEvent) {
-            if (event.getDate() == date) {
+            if (event.getDate().equals(date) ) {
                 listByDate.add(event);
             }
         }

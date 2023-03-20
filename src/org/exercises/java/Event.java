@@ -11,7 +11,7 @@ public class Event  implements Comparable<Event>{
     private int reservedPlaces;
 
     //CONSTRUCTOR
-    public Event(String title, LocalDate date, int totalPlaces) {
+    public Event(String title, LocalDate date, int totalPlaces) throws EventException {
 
         //gestitsco l'eccezione in cui la data inserita è anteriore alla data di oggi
         if (beforeToday(date)){
@@ -70,7 +70,7 @@ public class Event  implements Comparable<Event>{
 
 
 
-    public void reserve(){
+    public void reserve() throws EventException{
         if (beforeToday(date)){
             throw new EventException("the event is not avaiable");
         }else if(reservedPlaces < totalPlaces){
@@ -81,7 +81,7 @@ public class Event  implements Comparable<Event>{
 
     }
 
-    public void cancelReservation(){
+    public void cancelReservation() throws EventException{
         if(beforeToday(date)){
             throw new EventException("You can't cancel your booking for a past event");
         }else if(reservedPlaces == 0){
